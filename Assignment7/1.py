@@ -43,7 +43,16 @@ print(f'Classification Report (Kernel=RBF): {class_report_rbf}')
 
 
 '''
-Comparing two SVM Model:
+
+Based on the results, both models performed excceptionally well. However, there are tiny differences:
+- Linear karnel produced 2 false positives resulting in 99% accuracy. Precision, recall, and f1-score are very high but not perfect.
+- RBF didn't misclassified any data; meaning there's no false results. Hence, the accuracy is 100%. recision, recall, and f1-score all are perfect.
+
+Linear kernel assumes that the data is linearly separable. It performed very well, but a small number of data were incorrectly classified (2 FP).
+
+RBF kernel is more flexible and can model complex, nonlinear decision boundries. In the above case, it perfectly classified all the data (no false results); meaning, it outperformed the linear model.
+
+Since RBF model generated 100% accuracy, it suggests that a nonlinear decision boundry is optimal for this dataset.
 
 
 '''

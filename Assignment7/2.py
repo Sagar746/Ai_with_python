@@ -14,7 +14,7 @@ X = df[['Age','EstimatedSalary']]
 y = df['Purchased']
 
 # split dataset into 80-20 
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=5)
 
 # Scale feature using StandardScaler
 scaler  = StandardScaler()
@@ -23,7 +23,7 @@ X_train = scaler.fit_transform(X_train)
 X_test = scaler.transform(X_test)
 
 # train model using DecisionTreeClassifier with entropy 
-dt_entropy = DecisionTreeClassifier(criterion='entropy')
+dt_entropy = DecisionTreeClassifier(criterion='entropy', random_state=5)
 dt_entropy.fit(X_train, y_train)
 y_pred_entropy = dt_entropy.predict(X_test)
 
@@ -48,3 +48,13 @@ print(f'Confusion Matrix Gini: {dt_gini_conf}')
 
 dt_gini_class = classification_report(y_test, y_pred_gini)
 print(f'Classification Report Gini: {dt_gini_class}')
+
+
+'''
+Here, entropy produced 6 false positives, and 6 false negatives. Whereas, gini produced 6 false positives and 4 false negatives. From this it is seen that gini is better at identifying class 1.
+In case of class 0, both the models have performed identically producing 6 false positives.
+
+Overall gini has performed better as shown by 88% accuracy compared to that of Entropy's 85%.
+
+Gini is more precise for negative (0) class and for class 1, it is slightly better than entropy (0.79 vs 0.78)
+'''
